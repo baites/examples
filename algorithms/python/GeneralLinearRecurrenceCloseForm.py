@@ -144,20 +144,23 @@ b = [0,0,0,0,1]
 a = [1,1,1,1,1]
 LinearRecurrenceSequence('Pentanacci (A001591)', 20, a, b)
 
-# (P,Q)-Fibonacchi sequence
-# P = 1
-# Q = 2
-# b = np.array([0,1])
-# a = np.array([P,Q])
-# (P,Q)-Lucas sequence of second kind
-# P = 2
-# Q = 1
-# b = np.array([2,P])
-# a = np.array([P,Q])
-
 # A006904 sequence
 b = [1, 1]
 a = [1, 2]
 c = [1, 1]
 d = [1]
 LinearRecurrenceSequence('Non-homogeneous A006904', 20, a, b, c, d)
+
+# (P,Q)-Fibonacchi
+P = 1
+Q = 2
+b = [0,1]
+a = [P,Q]
+LinearRecurrenceSequence('(1,2)-Fibonacchi: Jacobsthal (A001045)', 20, a, b)
+
+# (P,Q)-Lucas of second kind
+P = 2
+Q = 1
+b = [2,P]
+a = [P,Q]
+LinearRecurrenceSequence('(2,1)-Lucas: Companion Pell (A002203)', 20, a, b)
