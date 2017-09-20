@@ -10,9 +10,7 @@ function F(n) {
     return 'Error no negative numbers allowed!';
   }
   n = Math.round(n);
-  const sqrt5 = Math.sqrt(5);
-  const phi = (1+sqrt5)/2;
-  return Math.round(phi**n/sqrt5);
+  return Math.round(Math.exp(n*Math.log(1.6180339897) - 0.80471895621705));
 }
 
-console.log(F(10));
+console.log(F(Number(process.argv[2])))

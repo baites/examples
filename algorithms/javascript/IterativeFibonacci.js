@@ -11,7 +11,7 @@ function F(n) {
     return 'Error no negative numbers allowed!';
   }
   n = Math.round(n);
-  if (n == 0 || n == 1) {
+  if (n < 2) {
     return n;
   }
   let F2 = 0;
@@ -26,4 +26,4 @@ function F(n) {
   return F0;
 }
 
-console.log(F(10))
+console.log(F(Number(process.argv[2])))
