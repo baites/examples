@@ -1,14 +1,14 @@
 #include <iostream>
 #include <string>
 
-unsigned long F(unsigned long n)
+double F(unsigned int n)
 {
   if (n < 2)
     return n;
-  unsigned long F2 = 0;
-  unsigned long F1 = 1;
-  unsigned long F0;
-  for(unsigned long i=2; i<=n; ++i)
+  double F2 = 0;
+  double F1 = 1;
+  double F0;
+  for(unsigned int i=2; i<=n; ++i)
   {
       F0 = F1 + F2;
       F2 = F1;
@@ -19,6 +19,7 @@ unsigned long F(unsigned long n)
 
 int main(int argc, const char* argv[])
 {
+  std::cout.precision(17);
   std::cout << F(std::stol(argv[1])) << std::endl;
   return 0;
 }

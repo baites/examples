@@ -2,8 +2,9 @@
 
 import matplotlib.pyplot as plt
 
-# Recursive algo
+# Recursive algorithm
 
+## Index of Fibonacci number 
 xr = (
         5,    20,     30,     35,     36,
        38,    40,     42,     44,     46,      48
