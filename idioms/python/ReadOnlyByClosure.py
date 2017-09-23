@@ -6,9 +6,11 @@ import sys
 def readonly(value):
     return property(lambda self: value)
 
-class ReadOnly(object):
-    def __init__(self):
-        ReadOnly.constant = readonly('victor')
+class A(object):
+    def __init__(self, value):
+        A.constant = readonly(value)
 
-sys.modules[__name__] = ReadOnly()
-print(constant)
+a = A('constant value')
+print(a.constant)
+
+a.constant = 'new value'

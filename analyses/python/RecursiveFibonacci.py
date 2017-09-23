@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 # Recursive algorithm
 
-## Index of Fibonacci number 
+## Index of Fibonacci number
 xr = (
         5,    20,     30,     35,     36,
        38,    40,     42,     44,     46,      48
@@ -29,4 +29,4 @@ plt.title('Performance of Fibonacci recursive algorithm')
 plt.xlabel('Fibonacci number index')
 plt.ylabel('Execution time [s]')
 plt.grid(True)
-plt.show()
+plt.savefig("RecursiveFibonacci.svg")

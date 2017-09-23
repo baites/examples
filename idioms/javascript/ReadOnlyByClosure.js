@@ -7,13 +7,13 @@ function readonly(object, name, value){
   });
 }
 
-function B() {
-  readonly(this, 'constant', 'Susana');
+function A() {
+  readonly(this, 'constant', 'constant value');
 }
-const b = new B();
-console.log(b.constant);
+const a = new A();
+console.log(a.constant);
 
-readonly(global, 'constant', 'victor');
+readonly(global, 'constant', 'global constant value');
 console.log(constant);
 
 constant = 5;
