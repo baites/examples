@@ -1,20 +1,20 @@
 #! /usr/bin/env python
 import copy
 
-def CreateClosures(value):
+def CreateClosure(value):
     """Create two closures with share context."""
     context = copy.deepcopy(value)
     def GetContext():
         return context
     def SetContext(value):
         nonlocal context
-        context = value
+        context = copy.deepcopy(value)
     return GetContext, SetContext
 
 # Creating closures with protective share context
 # Object mutability is irrelevant because context is
 # protected by the closure (capture by copy and unreachable)
-get_context, set_context = CreateClosures('A')
+get_context, set_context = CreateClosure('A')
 
 # Print original context value
 print('get context value: ', get_context())

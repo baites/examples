@@ -7,7 +7,7 @@ def CreateClosures(value):
     def GetContext():
         return context
     def SetContext(value):
-        context = value
+        context = copy.deepcopy(value)
     return GetContext, SetContext
 
 # Creating closures with protective share context

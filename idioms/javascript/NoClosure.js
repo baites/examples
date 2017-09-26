@@ -3,11 +3,16 @@
 
 // Defining context and method in global namespace
 let context = 'A';
+
 function Method() {
   return context;
 }
 
-function CreateMethodWithContext(value) {
+/**
+ * Create two closures with share context
+ * @param value - Value of context
+ */
+function CreateMethodReference(value) {
   context = value;
   return Method;
 }
@@ -16,5 +21,5 @@ function CreateMethodWithContext(value) {
 console.log('context when calling Method(): ' + Method());
 
 // Create a reference to method and set context
-const method = CreateMethodWithContext('B');
+const method = CreateMethodReference('B');
 console.log('context when calling method: ' + method());
