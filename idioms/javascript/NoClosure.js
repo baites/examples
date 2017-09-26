@@ -1,8 +1,9 @@
 #! /usr/bin/env node
 "use strict";
 
-let context = 'original value';
-function Method(){
+// Defining context and method in global namespace
+let context = 'A';
+function Method() {
   return context;
 }
 
@@ -11,7 +12,9 @@ function CreateMethodWithContext(value) {
   return Method;
 }
 
-const newMethod = CreateMethodWithContext('new value');
+// Print default initial context value
+console.log('context when calling Method(): ' + Method());
 
-console.log('context in orginal method: ' + Method());
-console.log('context in new method: ' + newMethod());
+// Create a reference to method and set context
+const method = CreateMethodWithContext('B');
+console.log('context when calling method: ' + method());
