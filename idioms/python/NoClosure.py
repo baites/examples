@@ -1,15 +1,19 @@
 #! /usr/bin/env python
 
-context = 'original value'
+# Defining context and method in global namespace
+context = 'A'
 def Method():
-    return context;
+    return context
 
-def CreateMethodWithContext(value):
-    global context;
+def CreateMethodReference(value):
+    """Return a reference to Method."""
+    global context
     context = value
     return Method
 
-new_method = CreateMethodWithContext('new value')
+# Print default initial value of context
+print('context when calling Method(): ', Method())
 
-print('context in orginal method: ', Method())
-print('context in new method: ', new_method())
+# Create a reference to method setting context
+method = CreateMethodReference('B')
+print('context when calling method: ', method())
