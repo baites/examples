@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 
+// Fibonacci recursive algorithm.
 unsigned long F(unsigned long n)
 {
   if (n < 2)

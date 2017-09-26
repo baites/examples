@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 
+// Fibonacci iterative algorithm.
 double F(unsigned int n)
 {
   if (n < 2)

@@ -4,6 +4,7 @@
 
 using namespace std;
 
+// Fibonacci closed-form expression.
 double F(unsigned int n)
 {
   return round(exp(n*log(1.6180339897L) - 0.80471895621705L));
