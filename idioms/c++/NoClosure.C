@@ -3,12 +3,14 @@
 
 using namespace std;
 
-string context = "original value";
+// Defining context and method in global namespace.
+string context = "A";
 string Method()
 {
     return context;
 }
 
+// Return a reference to Method.
 string (*CreateMethodWithContext(string value))()
 {
     context = value;
@@ -17,8 +19,11 @@ string (*CreateMethodWithContext(string value))()
 
 int main(int argc, const char* argv[])
 {
-    string (*newMethod)() = CreateMethodWithContext("new value");
-    cout << "context in orginal method: " << Method() << endl;
-    cout << "context in new method: " << newMethod() << endl;
+    // Print default initial context value
+    cout << "context when calling Method(): " << Method() << endl;
+
+    // Create a reference to method and set context
+    string (*method)() = CreateMethodWithContext("B");
+    cout << "context when calling method: " << method() << endl;
     return 0;
 }

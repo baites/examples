@@ -11,9 +11,9 @@ def CreateMethodReference(value):
     context = value
     return Method
 
-# Print default initial value of context
+# Print default initial context value
 print('context when calling Method(): ', Method())
 
-# Create a reference to method setting context
+# Create a reference to method and set context
 method = CreateMethodReference('B')
 print('context when calling method: ', method())
