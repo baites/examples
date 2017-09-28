@@ -10,7 +10,9 @@ function CreateClosures(value) {
     JSON.stringify(value)
   );
   function GetMethod() {
-    return context;
+    return JSON.parse(
+      JSON.stringify(context)
+    );
   }
   function SetMethod(value) {
     context = JSON.parse(
@@ -26,11 +28,16 @@ function CreateClosures(value) {
 // Creating closures with protective share context
 // Object mutability is irrelevant because context is
 // protected by the closure (capture by copy and unreachable)
-const closures = CreateClosures('A');
+const closures = CreateClosures(['A']);
 
 // Print original context value
-console.log('get context value: ' + closures.getContext());
+console.log('get context value: ', closures.getContext());
 
 // Set new context value
-closures.setContext('B');
-console.log('set and get context value: ' + closures.getContext());
+closures.setContext(['B']);
+console.log('set and get context value: ', closures.getContext());
+
+// It is not possible to get a refence to context
+const context = closures.getContext();
+context[0] = 'C';
+console.log('get context value: ', closures.getContext());

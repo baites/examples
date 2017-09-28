@@ -5,7 +5,7 @@ def CreateClosures(value):
     """Create two closures with share context."""
     context = copy.deepcopy(value)
     def GetContext():
-        return context
+        return copy.deepcopy(context)
     def SetContext(value):
         context = copy.deepcopy(value)
     return GetContext, SetContext
