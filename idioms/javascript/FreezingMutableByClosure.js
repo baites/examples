@@ -23,8 +23,6 @@ const mutable = {
 
 // Freezing mutable by setting a ContantProperty in global
 FreezingMutable(global, 'constant', mutable);
-console.log(constant);
-
 // Print object
 console.log(constant);
 
@@ -37,3 +35,11 @@ console.log(constant);
 // by updating object return by constant
 constant['B'] = 'can be changed';
 console.log(constant);
+
+// Try to modify constant property
+try {
+    constant = { 'A': 'new' };
+    console.log(constant);
+} catch(error) {
+    console.log(error);
+}
