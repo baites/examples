@@ -25,7 +25,7 @@ public:
     {
         cout << "...probe destruction " << &(*this) << endl;
     }
-    const string & getPayload() const
+    const T & getPayload() const
     {
         return payload;
     }
@@ -34,10 +34,10 @@ public:
 template<typename T>
 tuple<function<T()>, function<void(T)>> CreateMethods(const T & value)
 {
-    shared_ptr<T> context(new T(value));
+    T context = value;
     return {
-        [context]() { return (*context); },
-        [context](const T & value) { (*context) = value; }
+        [&]() { return context; },
+        [&](T value) { context = value; }
     };
 }
 
