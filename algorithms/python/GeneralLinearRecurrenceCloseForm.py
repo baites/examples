@@ -5,7 +5,7 @@ import scipy.signal as signal
 from scipy.special import binom
 
 def CreatePO(a,b):
-    if len(a) > len(b):
+    if len(a) != len(b):
         raise ValueError('Array a should be longer than b')
     p = np.zeros(len(b))
     for n in range(len(b)):
@@ -48,9 +48,7 @@ def EvalCloseForm(r, p, h, n, format='integer'):
     k = 0
     pold = None
     for i in range(len(r)):
-        if k == 0:
-            k = 1
-        elif p[i] != pold:
+        if k == 0 or p[i] != pold:
             k = 1
         else:
             k += 1

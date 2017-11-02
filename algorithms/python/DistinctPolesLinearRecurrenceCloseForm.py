@@ -3,7 +3,7 @@
 import numpy as np
 
 def CreateP(a,b):
-    if len(a) > len(b):
+    if len(a) != len(b):
         raise ValueError('Array a should be longer than b')
     p = np.zeros(len(b))
     for n in range(len(b)):
