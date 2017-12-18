@@ -89,6 +89,10 @@ leg = legend([rp rb], ceilingPeriodStr, ceilingPeriodRangeStr);
 set(leg, 'Box', 'off')
 set(leg, 'Location', 'NorthWest')
 
+rect = [0 0 1120 840];
+set(gcf, 'OuterPosition', rect);
+r = 100;
+set(gcf, 'PaperPosition', rect/r);
 print(fig, '-dsvg', file);
 fprintf(ceilingPeriodStr)
 fprintf(ceilingPeriodRangeStr)
