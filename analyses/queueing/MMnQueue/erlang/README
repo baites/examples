@@ -1,0 +1,29 @@
+This directory contains functions that compute the Erlang B (blocked
+calls lost) and Erlang C (blocked calls wait) probabilities.  The
+usual textbook formula is unsuitable for direct evaluation because of
+round-off error.  These functions make use of a recurrence relation
+which is more accurate, particularly for situations where the number
+of servers and the load are both large.
+
+The latest version of this code adds a routine for computing the
+Engset blocking probability E, for a system with n servers, m
+customers, and intensity rho.
+
+The functions are:
+ 
+  erlangb                   Find B, given n and rho.
+  erlangc                   Find C, given n and rho.
+  erlangbinv                Find n such that B<=p, rho fixed.
+  erlangcinv                Find n such that C<=p, rho fixed.
+  findrhob                  Find rho such that erlangb(n,rho)=p, given n, p.
+  findrhoc                  Find rho such that erlangc(n,rho)=p, given n, p.
+  engset                    Find E, given m, n, and rho.
+
+Brian Borchers                          borchers@nmt.edu              
+Department of Mathematics               http://www.nmt.edu/~borchers/   
+New Mexico Tech                         Phone: 505-835-5813              
+Socorro, NM 87801                       FAX: 505-835-5366"
+
+
+
+
