@@ -2,7 +2,7 @@ addpath('erlang')
 addpath('asympt')
 
 N = 10;
-U = 0.01:0.01:0.98;
+U = 0.01:0.01:0.99;
 
 K = size(U);
 Ec = zeros(1, K(2));
@@ -24,6 +24,6 @@ plot(U, UpL, 'r--', 'LineWidth', 2);
 grid on
 grid minor
 
-legend('Enlang C','Upper tight bound','Upper loose bound', 'Location', 'northwest')
+legend('Enlang C','Tight upper bound','Loose upper bound', 'Location', 'northwest')
 legend('boxoff')
 set(gca,'FontSize', 16);
