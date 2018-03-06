@@ -44,6 +44,6 @@ def order3():
     z = A('z')
     show(x, y, z)
 
-order1()
+#order1()
 #order2()
-#order3()
+order3()
