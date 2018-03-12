@@ -24,7 +24,7 @@ def call(command, timeout=5, polltime=0.1):
         # Set deadline to execute the command
         deadline = time.time() + timeout
         # Loop until command is completed
-        # of command reach deadline
+        # or command reach deadline
         while time.time() < deadline and proc.poll() is None:
             time.sleep(polltime)
         # If the command reach deadline its process is killed
@@ -38,7 +38,8 @@ def call(command, timeout=5, polltime=0.1):
                  raise subprocess.CalledProcessError(proc.returncode, command)
             stdout, stderr = proc.communicate()
     except Exception as error:
-        # When catching an exception check if process is killed
+        # When catching an exception check if process was killed
+        # If process still running kill it!
         if proc.poll() is None:
             proc.kill();
         raise error
