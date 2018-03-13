@@ -4,7 +4,7 @@ from functools import wraps
 import time
 
 def mtimeout(attribute):
-    """Implement function timeout decorator."""
+    """Implement function member timeout decorator."""
     def decorator(callback):
         @wraps(callback)
         def wrapper(self, *args, **kargs):
