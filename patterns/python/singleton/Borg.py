@@ -12,14 +12,10 @@ class Borg(object):
 class A(Borg):
     def __init__(self, value):
         self.value = value
-    def __str__(self):
-        return 'A:{}'.format(self.value)
 
 class B(A):
     def __init__(self, value):
         self.value = value
-    def __str__(self):
-        return 'B:{}'.format(self.value)
 
 
 def init_A_before_B():
@@ -28,20 +24,19 @@ def init_A_before_B():
     # Initialize instance x of parent class A
     x = A('x')
     print(repr(x))
-    print('_state value in A: ', A._state)
-    # Child class _state comes from A
-    print('_state value in B: ', B._state)
+    print('_state in A: object at', hex(id(A._state)))
+    print('_state in B: object at', hex(id(B._state)))
 
     # Initiale y of child class B affects value of A
-    # Because share same _state
+    # because share same _state
     y = B('y')
     print(repr(y))
-    print('_state value in A: ', A._state)
-    print('_state value in B: ', B._state)
-
+    print('_state in A: object at', hex(id(A._state)))
+    print('_state in B: object at', hex(id(B._state)))
 
     print('x.value = {}'.format(x.value))
     print('y.value = {}'.format(y.value))
+
 
 def init_B_before_A():
     print('Initialize B before A')
@@ -49,24 +44,37 @@ def init_B_before_A():
     # Initialize instance y of child class B
     y = B('y')
     print(repr(y))
-    print('_state value in A: ', hex(id(A._state)))
-    # Child class _state comes from A
-    print('_state value in B: ', hex(id(B._state)))
+    print('_state in A: object at', hex(id(A._state)))
+    print('_state in B: object at', hex(id(B._state)))
 
-    # Initiale y of child class B affects value of A
-    # Because share same _state
-    x = B('x')
+    # Initialize x using parent class A does not affect value of y
+    # because _instance has None value.
+    x = A('x')
     print(repr(x))
-    print('_state value in A: ', A._state)
-    print('_state value in B: ', B._state)
+    print('_state in A: object at', hex(id(A._state)))
+    print('_state in B: object at', hex(id(B._state)))
 
     print('x.value = {}'.format(x.value))
     print('y.value = {}'.format(y.value))
+
+
+def init_A_twice():
+    print('Initialize A twice')
+
+    # Initialize instance x using parent class A
+    x = A('x')
+    # Initialize instance y using parent class A
+    y = A('y')
+    print('x.value = {}'.format(x.value))
+    print('y.value = {}'.format(y.value))
+
 
 if len(sys.argv) == 2 and sys.argv[1] == 'A':
     init_A_before_B()
 elif len(sys.argv) == 2 and sys.argv[1] == 'B':
     init_B_before_A()
+elif len(sys.argv) == 2 and sys.argv[1] == 'I':
+    init_A_twice()
 else:
-    print('Use {} A for init A before B or'.format(sys.argv[0]))
-    print('Use {} B for init B before A or'.format(sys.argv[0]))
+    print('Use {} A for init A before B'.format(sys.argv[0]))
+    print('Use {} B for init B before A'.format(sys.argv[0]))

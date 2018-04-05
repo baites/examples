@@ -1,15 +1,19 @@
 #! /usr/bin/env python
 
+import copy
 import sys
 
-class ClassVariableSingleton(object):
-    _instance = None
-    def __new__(cls, *args, **kwargs):
-        if not cls._instance:
-            cls._instance = super().__new__(cls)
-        return cls._instance
+class MetaBorg(type):
+    _state = {"__is_init__": False}
+    def __call__(cls, *args, **kwargs):
+        instance = object().__new__(cls, *args, **kwargs)
+        instance.__dict__ = cls._state
+        if not cls._state['__is_init__']:
+            instance.__init__(*args, **kwargs)
+            cls._state['__is_init__'] = True
+        return instance
 
-class A(ClassVariableSingleton):
+class A(metaclass=MetaBorg):
     def __init__(self, value):
         self.value = value
 
@@ -17,40 +21,42 @@ class B(A):
     def __init__(self, value):
         self.value = value
 
+
 def init_A_before_B():
     print('Initialize A before B')
 
-    # Initialize instance x using parent class A
+    # Initialize instance x of parent class A
     x = A('x')
-    print(repr(A._instance))
     print(repr(x))
+    print('_state in A: object at', hex(id(A._state)))
+    print('_state in B: object at', hex(id(B._state)))
 
-    # Child class _instance inherent
-    # value after x initialization
-    print(repr(B._instance))
-
-    # Initialize y using child class B affects value of x
-    # because _instance has a value inherent from A.
+    # Initiale y of child class B affects value of A
+    # because share same _state
     y = B('y')
     print(repr(y))
+    print('_state in A: object at', hex(id(A._state)))
+    print('_state in B: object at', hex(id(B._state)))
+
     print('x.value = {}'.format(x.value))
     print('y.value = {}'.format(y.value))
+
 
 def init_B_before_A():
     print('Initialize B before A')
 
-    # Initialize instance y using parent class B
+    # Initialize instance y of child class B
     y = B('y')
-    print(repr(B._instance))
     print(repr(y))
-
-    # Parent class _instance is still None!
-    print(repr(A._instance))
+    print('_state in A: object at', hex(id(A._state)))
+    print('_state in B: object at', hex(id(B._state)))
 
     # Initialize x using parent class A does not affect value of y
     # because _instance has None value.
     x = A('x')
     print(repr(x))
+    print('_state in A: object at', hex(id(A._state)))
+    print('_state in B: object at', hex(id(B._state)))
 
     print('x.value = {}'.format(x.value))
     print('y.value = {}'.format(y.value))
