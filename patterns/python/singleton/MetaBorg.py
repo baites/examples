@@ -4,13 +4,13 @@ import copy
 import sys
 
 class MetaBorg(type):
-    _state = {"__is_init__": False}
+    _state = {"__skip_init__": False}
     def __call__(cls, *args, **kwargs):
         instance = object().__new__(cls, *args, **kwargs)
         instance.__dict__ = cls._state
-        if not cls._state['__is_init__']:
+        if not cls._state['__skip_init__']:
             instance.__init__(*args, **kwargs)
-            cls._state['__is_init__'] = True
+            cls._state['__skip_init__'] = True
         return instance
 
 class A(metaclass=MetaBorg):
