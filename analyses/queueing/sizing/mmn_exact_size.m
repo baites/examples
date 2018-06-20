@@ -70,11 +70,12 @@ function R = faux(U, Q, N)
 end
 
 function NF = mmn(QF, UI, NI)
-    NF = 1.1*UI*NI;
+    x = UI*NI;
+    NF = 1.1 * x;
     while 1
-        UF = UI*NI/NF;
+        UF = x/NF;
         p = QF*(1-UF)/UF;
-        N = erlangcinv(p, UF*NF);
+        N = erlangcinv(p, x);
         if N == NF || N+1 == NF
             NF = N;
             break
