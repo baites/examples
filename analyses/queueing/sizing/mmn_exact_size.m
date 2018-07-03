@@ -3,9 +3,9 @@ addpath('../erlang')
 
 % System initial conditions
 % Number of servers
-NI = 100;
+NI = 1000;
 % Number of cutomers in queue
-QI = 200;
+QI = 500;
 
 % Extract system utilization
 fwrap = @(x) faux(x, QI, NI);

@@ -3,32 +3,32 @@ addpath('../erlang')
 
 % System initial conditions
 % Number of servers
-N1 = 10;
+NI = 1000;
 % Number of customers in queue
-Q1 = 50;
+qI = 500;
 % Fix overprovision
 F = 10;
 
 % Extract system utilization
-fwrap = @(x) faux(x, Q1, N1);
-U1 = fzero(fwrap, 1.0);
+fwrap = @(x) faux(x, qI, NI);
+UI = fzero(fwrap, 1.0);
 
 % Compute plot range
-fwrap = @(x) faux(x, 1.5*Q1, N1);
+fwrap = @(x) faux(x, 1.5*qI, NI);
 Umax = fzero(fwrap, 1.0);
 U = 0.01:(Umax - 0.01)/100:Umax;
 
 % Print details of the initial conditions
-fprintf('Initial number of servers: %d\n', N1)
-fprintf('Initial queue lenght: %0.1f\n', Q1)
-fprintf('Initial server utilization: %0.2f\n', U1)
+fprintf('Initial number of servers: %d\n', NI)
+fprintf('Initial queue lenght: %0.1f\n', qI)
+fprintf('Initial server utilization: %0.2f\n', UI)
 
 % Generate the elbow curve
 K = size(U);
 Ec = zeros(1, K(2));
 
 for i = 1:K(2)
-    Ec(i) = erlangc(N1,U(i)*N1)*U(i)/(1-U(i));
+    Ec(i) = erlangc(NI,U(i)*NI)*U(i)/(1-U(i));
 end
 
 plot(U, Ec, 'Color', 'red', 'LineWidth', 2);
@@ -41,29 +41,29 @@ grid minor
 hold on;
 xl = xlim;
 yl = ylim;
-line([U1 U1], yl, 'Color', 'red', 'LineStyle', ':', 'LineWidth', 1.5);
-line(xl, [Q1 Q1], 'Color', 'red', 'LineStyle', ':', 'LineWidth', 1.5);
+line([UI UI], yl, 'Color', 'red', 'LineStyle', ':', 'LineWidth', 1.5);
+line(xl, [qI qI], 'Color', 'red', 'LineStyle', ':', 'LineWidth', 1.5);
 
 % Update system size using queue heuristic
-N2 = N1 + F;
+NF = NI + F;
 
 % Plot updated elbow curve
 for i = 1:K(2)
-    Ec(i) = erlangc(N2,U(i)*N2)*U(i)/(1-U(i));
+    Ec(i) = erlangc(NF,U(i)*NF)*U(i)/(1-U(i));
 end
 plot(U, Ec, 'Color', 'blue', 'LineWidth', 2);
 
 % Compute system final condition
-U2 = U1*N1/N2;
-Q2 = erlangc(N2,U2*N2)*U2/(1-U2);
+UF = UI*NI/NF;
+qF = erlangc(NF,UF*NF)*UF/(1-UF);
 
 % Print details of the initial conditions
-fprintf('Final number of servers: %d\n', N2)
-fprintf('Final queue lenght: %0.1f\n', Q2)
-fprintf('Final server utilization: %0.2f\n', U2)
+fprintf('Final number of servers: %d\n', NF)
+fprintf('Final queue lenght: %0.1f\n', qF)
+fprintf('Final server utilization: %0.2f\n', UF)
 
-line([U2 U2], yl, 'Color', 'blue', 'LineStyle', ':', 'LineWidth', 1.5);
-line(xl, [Q2 Q2], 'Color', 'blue', 'LineStyle', ':', 'LineWidth', 1.5);
+line([UF UF], yl, 'Color', 'blue', 'LineStyle', ':', 'LineWidth', 1.5);
+line(xl, [qF qF], 'Color', 'blue', 'LineStyle', ':', 'LineWidth', 1.5);
 
 set(gca,'FontSize', 16);
 
