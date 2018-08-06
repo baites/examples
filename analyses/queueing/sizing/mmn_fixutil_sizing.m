@@ -7,7 +7,7 @@ NI = 1000;
 % Number of customers in queue
 qI = 500;
 % Fix overprovision
-F = 10;
+alpha = 0.25;
 
 % Extract system utilization
 fwrap = @(x) faux(x, qI, NI);
@@ -45,7 +45,7 @@ line([UI UI], yl, 'Color', 'red', 'LineStyle', ':', 'LineWidth', 1.5);
 line(xl, [qI qI], 'Color', 'red', 'LineStyle', ':', 'LineWidth', 1.5);
 
 % Update system size using queue heuristic
-NF = ceil(NI + F);
+NF = ceil(NI + alpha*NI);
 
 % Plot updated elbow curve
 for i = 1:K(2)

@@ -7,7 +7,7 @@ NI = 1000;
 % Number of customers in queue
 Q1 = 500;
 % Overprovision
-beta = 2.29;
+beta = 2.3;
 
 % Extract system utilization
 fwrap = @(x) faux(x, Q1, NI);
