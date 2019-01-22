@@ -39,9 +39,7 @@ class DictWithLast:
             node.next.prev = node.prev
         del self._map[key]
 
-
 dlast = DictWithLast()
-
 dlast.set(1, 'A')
 dlast.set(2, 'B')
 dlast.set(3, 'C')
