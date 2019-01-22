@@ -11,7 +11,7 @@ def merge(interval, last):
     last[0] = min(last[0], interval[0])
     last[1] = max(last[1], interval[1])
 
-def sum_invertal(intervals):
+def sum_intervals(intervals):
     result = 0
     for interval in intervals:
         result += interval[1] - interval[0]
@@ -34,7 +34,7 @@ def coverage(intervals):
             merge(interval, last)
         else:
             mergers.append(list(interval))
-    return sum_invertal(mergers)
+    return sum_intervals(mergers)
 
 def coverage_naive(intervals):
     mina = 2**64
@@ -54,8 +54,8 @@ while 1:
 
     input = []
     for n in range(100):
-        imin = random.randint(0,19)
-        imax = random.randint(imin+1, 20)
+        imin = random.randint(0,99)
+        imax = random.randint(imin+1, 100)
         input.append((imin, imax))
 
     print(input)

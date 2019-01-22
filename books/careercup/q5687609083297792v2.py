@@ -11,7 +11,7 @@ def merge(interval, last):
     last[0] = min(last[0], interval[0])
     last[1] = max(last[1], interval[1])
 
-def sum_invertal(intervals):
+def sum_intervals(intervals):
     result = 0
     for interval in intervals:
         result += interval[1] - interval[0]
@@ -34,7 +34,7 @@ def coverage(intervals):
             merge(interval, last)
         else:
             mergers.append(list(interval))
-    return sum_invertal(mergers)
+    return sum_intervals(mergers)
 
 input = [(1,4), (6,8), (2,4), (7,9), (10, 15)]
 print(input)
