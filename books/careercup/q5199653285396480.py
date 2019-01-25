@@ -36,6 +36,7 @@ def reverse_list(fwd):
 
 def sum_reverse_list(node1, node2):
     c = 0
+    node = None
     prev = None
     while node1 is not None or\
             node2 is not None:
@@ -72,4 +73,4 @@ num2 = [1, 2, 3]
 node2 = gen_list(num2)
 print_list(node2)
 print('-----')
-print_list(sum_list(None, None))
+print_list(sum_list(node1, node2))
