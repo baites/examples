@@ -72,4 +72,4 @@ num2 = [1, 2, 3]
 node2 = gen_list(num2)
 print_list(node2)
 print('-----')
-print_list(sum_list(node1, node2))
+print_list(sum_list(None, None))
