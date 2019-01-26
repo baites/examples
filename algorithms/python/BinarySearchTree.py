@@ -10,7 +10,7 @@ class BTNode:
 class BSTree:
 
     def __init__(self):
-        self._root = None
+        self.root = None
 
     @staticmethod
     def _find(key, node):
@@ -26,13 +26,13 @@ class BSTree:
             return node
 
     def find(self, key):
-        if self._root is None:
+        if self.root is None:
             raise IndexError('find from empty tree')
-        return self._find(key, self._root)
+        return self._find(key, self.root)
 
     def insert(self, key):
-        if self._root is None:
-            self._root = BTNode(key)
+        if self.root is None:
+            self.root = BTNode(key)
             return
         node = self.find(key)
         if node.key > key:
@@ -60,9 +60,9 @@ class BSTree:
     def rexplore(self,
         preorder=None, inorder=None, postorder=None
     ):
-        if self._root is None:
+        if self.root is None:
             return
-        BSTree._rexplore(self._root,
+        BSTree._rexplore(self.root,
             preorder, inorder, postorder
         )
 
@@ -91,9 +91,9 @@ class BSTree:
     def iexplore(self,
         preorder=None, inorder=None, postorder=None
     ):
-        if self._root is None:
+        if self.root is None:
             return
-        BSTree._iexplore(self._root,
+        BSTree._iexplore(self.root,
             preorder, inorder, postorder
         )
 
