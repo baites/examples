@@ -1,3 +1,5 @@
+# https://leetcode.com/problems/3sum/
+
 class Solution(object):
     def add(self, veto, ntuple):
         veto.add((ntuple[0], ntuple[1], ntuple[2]))

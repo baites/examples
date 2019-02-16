@@ -1,3 +1,5 @@
+# https://leetcode.com/problems/median-of-two-sorted-arrays/
+
 class Naive1(object):
     def findMedianSortedArrays(self, nums1, nums2):
         nums = nums1 + nums2
