@@ -161,8 +161,8 @@ class Solution(object):
 import random
 import time
 
-size = 2000000
-maxv = 1
+size = 1000000
+maxv = 10000
 
 while 1:
     val = random.randint(0,maxv)

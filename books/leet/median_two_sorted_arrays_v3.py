@@ -158,8 +158,9 @@ class Naive(object):
         return 0.5*(nums[size//2-1] + nums[size//2])
 
 
-A1 = [0]*100000000
-A2 = [0]*100000000
+A1 = [-11, -11, -7, -5, 0, 4, 9]
+A2 = [-11, -10, -10, -10, -7, -7, -6, -5, -5, 0, 2, 3, 5, 6, 9, 11]
+
 
 naive = Naive().findMedianSortedArrays(A1, A2)
 print(naive)
