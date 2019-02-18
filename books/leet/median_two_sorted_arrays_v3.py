@@ -147,8 +147,8 @@ class Solution(object):
         return 0.5*float(median1+median2)
 
 
-A1 = [1]*100000
-A2 = [0]*1000
+A1 = [1, 2]
+A2 = [3, 4]
 
 solution = Solution().findMedianSortedArrays(A1, A2)
 print(solution)
