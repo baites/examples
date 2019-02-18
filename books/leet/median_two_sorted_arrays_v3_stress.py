@@ -119,11 +119,11 @@ class Solution(object):
             v1 = m1
             v2 = m2
             if m1 > 0 and m2 < S2 and A1[m1-1] > A2[m2]:
-               r1 = m1+1
-               l2 = m2
+               r1 = m1
+               l2 = m2+1
             elif m2 > 0 and m1 < S1 and A2[m2-1] > A1[m1]:
-                l1 = m1
-                r2 = m2+1
+                l1 = m1+1
+                r2 = m2
             else:
                 break
         if m1 < S1 and m2 < S2:
@@ -143,7 +143,7 @@ class Solution(object):
         S = len(A1) + len(A2)
         edge = self.isEdgeCase(A1, A2)
         if edge is not None:
-            return edge
+            return float(edge)
         median1 = self.findMedianHelper(A1, A2)
         if S % 2 == 1:
             return float(median1)
@@ -151,18 +151,15 @@ class Solution(object):
             A1.pop()
         else:
             A2.pop()
-        edge = self.isEdgeCase(A1, A2)
-        if edge is not None:
-            return 0.5*(median1+edge)
         median2 = self.findMedianHelper(A1, A2)
-        return 0.5*(median1+median2)
+        return 0.5*float(median1+median2)
 
 
 import random
 import time
 
-size = 1000000
-maxv = 100000
+size = 100000
+maxv = 10000
 
 while 1:
     val = random.randint(0,maxv)
@@ -170,7 +167,7 @@ while 1:
     size2 = random.randint(0,size)
     if size1 == 0 and size2 == 0:
         continue
-    nums1 = [random.randint(-val,val) for i in range(size1)]
+    nums1 = [random.randint(-val,val) for i in range(1)]
     nums2 = [random.randint(-val,val) for i in range(size2)]
     nums1.sort()
     nums2.sort()

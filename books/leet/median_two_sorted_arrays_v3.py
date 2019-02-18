@@ -111,11 +111,11 @@ class Solution(object):
             v1 = m1
             v2 = m2
             if m1 > 0 and m2 < S2 and A1[m1-1] > A2[m2]:
-               r1 = m1+1
-               l2 = m2
+               r1 = m1
+               l2 = m2+1
             elif m2 > 0 and m1 < S1 and A2[m2-1] > A1[m1]:
-                l1 = m1
-                r2 = m2+1
+                l1 = m1+1
+                r2 = m2
             else:
                 break
         if m1 < S1 and m2 < S2:
@@ -135,7 +135,7 @@ class Solution(object):
         S = len(A1) + len(A2)
         edge = self.isEdgeCase(A1, A2)
         if edge is not None:
-            return edge
+            return float(edge)
         median1 = self.findMedianHelper(A1, A2)
         if S % 2 == 1:
             return float(median1)
@@ -143,18 +143,15 @@ class Solution(object):
             A1.pop()
         else:
             A2.pop()
-        edge = self.isEdgeCase(A1, A2)
-        if edge is not None:
-            return 0.5*(median1+edge)
         median2 = self.findMedianHelper(A1, A2)
-        return 0.5*(median1+median2)
+        return 0.5*float(median1+median2)
 
 
-A1 = [1, 2]
-A2 = [3, 4]
+A1 = [1]*100000
+A2 = [0]*1000
 
 solution = Solution().findMedianSortedArrays(A1, A2)
 print(solution)
 
-# Runtime: 92 ms, faster than 24.47% of Python online submissions for Median of Two Sorted Arrays.
+# Runtime: 64 ms, faster than 52.83% of Python online submissions for Median of Two Sorted Arrays.
 # Memory Usage: 10.9 MB, less than 100.00% of Python online submissions for Median of Two Sorted Arrays.
