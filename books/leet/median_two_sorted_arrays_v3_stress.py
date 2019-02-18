@@ -162,7 +162,7 @@ import random
 import time
 
 size = 1000000
-maxv = 10000
+maxv = 100000
 
 while 1:
     val = random.randint(0,maxv)

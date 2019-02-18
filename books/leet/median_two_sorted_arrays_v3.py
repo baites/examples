@@ -150,21 +150,11 @@ class Solution(object):
         return 0.5*(median1+median2)
 
 
-class Naive(object):
-    def findMedianSortedArrays(self, nums1, nums2):
-        nums = nums1 + nums2
-        nums.sort()
-        size = len(nums)
-        if size % 2 == 1:
-            return float(nums[size//2])
-        return 0.5*(nums[size//2-1] + nums[size//2])
+A1 = [1, 2]
+A2 = [3, 4]
 
-
-A1 = [-11, -11, -7, -5, 0, 4, 9]
-A2 = [-11, -10, -10, -10, -7, -7, -6, -5, -5, 0, 2, 3, 5, 6, 9, 11]
-
-
-naive = Naive().findMedianSortedArrays(A1, A2)
-print(naive)
 solution = Solution().findMedianSortedArrays(A1, A2)
 print(solution)
+
+# Runtime: 92 ms, faster than 24.47% of Python online submissions for Median of Two Sorted Arrays.
+# Memory Usage: 10.9 MB, less than 100.00% of Python online submissions for Median of Two Sorted Arrays.
