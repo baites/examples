@@ -65,17 +65,15 @@ class Solution(object):
         l1, r1, l2, r2, m
     ):
         o1 = -1; o2 = -1
-        indexes = None
         while 1:
             m1 = (l1+r1)//2
             m2 = (l2+r2)//2
             if m1 == o1 and m2 == o2:
-                indexes = []
                 for m1 in range(l1, r1):
                     for m2 in range(l2, r2):
-                        if m1+m2 == m:
-                            indexes.append((m1, m2))
-                break
+                        if m1+m2 == m and\
+                            (m1 != o1 or m2 != o2):
+                            return m1, m2
             o1 = m1
             o2 = m2
             if (m1 + m2) > m:
@@ -85,9 +83,7 @@ class Solution(object):
                 l1 = m1
                 l2 = m2
             else:
-                indexes = [(m1, m2)]
-                break
-        return indexes
+                return m1, m2
 
     def findMedianHelper(self, A1, A2):
         """Help to find the median between arrays."""
@@ -101,23 +97,12 @@ class Solution(object):
         r1 = S1+1
         l2 = 0
         r2 = S2+1
-        v1 = -1
-        v2 = -1
 
         # Binary search
         while 1:
-            m1 = (l1 + r1)//2
-            m2 = (l2 + r2)//2
-            indexes = self.findMedianIndexes(
+            m1, m2 = self.findMedianIndexes(
                 l1, r1, l2, r2, m
             )
-            for i1, i2 in indexes:
-                if i1 != v1 or i2 != v2:
-                    m1 = i1
-                    m2 = i2
-                    break
-            v1 = m1
-            v2 = m2
             if m1 > 0 and m2 < S2 and A1[m1-1] > A2[m2]:
                r1 = m1
                l2 = m2+1
@@ -158,7 +143,7 @@ class Solution(object):
 import random
 import time
 
-size = 100000
+size = 1000000
 maxv = 10000
 
 while 1:
@@ -167,7 +152,7 @@ while 1:
     size2 = random.randint(0,size)
     if size1 == 0 and size2 == 0:
         continue
-    nums1 = [random.randint(-val,val) for i in range(1)]
+    nums1 = [random.randint(-val,val) for i in range(size1)]
     nums2 = [random.randint(-val,val) for i in range(size2)]
     nums1.sort()
     nums2.sort()
