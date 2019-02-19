@@ -10,27 +10,24 @@ class Naive(object):
 
 class Solution(object):
 
-    def findMedianSortedArray(self, A):
+    def findMedianSortedArray(self, A, S):
         """Find median for an assorted array."""
-        S = len(A)
         m = S//2
         if S % 2 == 1:
             return float(A[m])
         return 0.5*(A[m] + A[m-1])
 
-    def isEdgeCase(self, A1, A2):
+    def isEdgeCase(self, A1, S1, A2, S2):
         """Check for edge cases solutions."""
         # Array size
-        S1 = len(A1)
-        S2 = len(A2)
         S = S1 + S2
         m = S//2
 
         # One empty array
         if S1 == 0:
-            return self.findMedianSortedArray(A2)
+            return self.findMedianSortedArray(A2, S2)
         if S2 == 0:
-            return self.findMedianSortedArray(A1)
+            return self.findMedianSortedArray(A1, S1)
 
         # None overlaping arrays
         if A1[-1] < A2[0]:
@@ -71,8 +68,7 @@ class Solution(object):
             if m1 == o1 and m2 == o2:
                 for m1 in range(l1, r1):
                     for m2 in range(l2, r2):
-                        if m1+m2 == m and\
-                            (m1 != o1 or m2 != o2):
+                        if m1+m2 == m:
                             return m1, m2
             o1 = m1
             o2 = m2
@@ -85,12 +81,10 @@ class Solution(object):
             else:
                 return m1, m2
 
-    def findMedianHelper(self, A1, A2):
+    def findMedianHelper(self, A1, S1, A2, S2):
         """Help to find the median between arrays."""
 
         # Array size
-        S1 = len(A1)
-        S2 = len(A2)
         S = S1 + S2
         m = S//2
         l1 = 0
@@ -125,18 +119,20 @@ class Solution(object):
     #    :type A2: List[int]
     #    :rtype: float
     #    """
-        S = len(A1) + len(A2)
-        edge = self.isEdgeCase(A1, A2)
+        S1 = len(A1)
+        S2 = len(A2)
+        S = S1 + S2
+        edge = self.isEdgeCase(A1, S1, A2, S2)
         if edge is not None:
             return float(edge)
-        median1 = self.findMedianHelper(A1, A2)
+        median1 = self.findMedianHelper(A1, S1, A2, S2)
         if S % 2 == 1:
             return float(median1)
         if A1[-1] > A2[-1]:
-            A1.pop()
+            S1 -= 1
         else:
-            A2.pop()
-        median2 = self.findMedianHelper(A1, A2)
+            S2 -= 1
+        median2 = self.findMedianHelper(A1, S1, A2, S2)
         return 0.5*float(median1+median2)
 
 
