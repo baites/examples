@@ -58,27 +58,6 @@ class Solution(object):
                     return 0.5*(A1[0]+A2[-1])
         return None
 
-    def findMedianIndexes(self,
-        l1, r1, l2, r2, m
-    ):
-        if (r1-l1) < (r2-l2):
-            l = l1; r = r1
-            L = l2; R = r2
-        else:
-            l = l2; r = r2
-            L = l1; R = r1
-        while 1:
-            x = (l+r)//2
-            y = m - x
-            if y >= R:
-                l = x+1
-            elif y < L:
-                r = x
-            elif (r1-l1) < (r2-l2):
-                return x, y
-            else:
-                return y, x
-
     def findMedianHelper(self, A1, S1, A2, S2):
         """Help to find the median between arrays."""
 
@@ -92,9 +71,10 @@ class Solution(object):
 
         # Binary search
         while 1:
-            m1, m2 = self.findMedianIndexes(
-                l1, r1, l2, r2, m
-            )
+            l = max(m-r1+1,l2)
+            r = min(m-l1+1,r2)
+            m2 = (l+r)//2
+            m1 = m-m2
             if m1 > 0 and m2 < S2 and A1[m1-1] > A2[m2]:
                r1 = m1
                l2 = m2+1
@@ -109,7 +89,6 @@ class Solution(object):
             return A1[m1]
         else:
             return A2[m2]
-
 
     def findMedianSortedArrays(self, A1, A2):
         """
@@ -138,7 +117,7 @@ import random
 import time
 
 size = 1000000
-maxv = 10000
+maxv = 100000
 
 while 1:
     val = random.randint(0,maxv)

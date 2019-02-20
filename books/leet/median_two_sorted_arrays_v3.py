@@ -53,25 +53,23 @@ class Solution(object):
     def findMedianIndexes(self,
         l1, r1, l2, r2, m
     ):
-        o1 = -1; o2 = -1
+        if (r1-l1) < (r2-l2):
+            l = l1; r = r1
+            L = l2; R = r2
+        else:
+            l = l2; r = r2
+            L = l1; R = r1
         while 1:
-            m1 = (l1+r1)//2
-            m2 = (l2+r2)//2
-            if m1 == o1 and m2 == o2:
-                for m1 in range(l1, r1):
-                    for m2 in range(l2, r2):
-                        if m1+m2 == m:
-                            return m1, m2
-            o1 = m1
-            o2 = m2
-            if (m1 + m2) > m:
-                r1 = m1+1
-                r2 = m2+1
-            elif (m1 + m2) < m:
-                l1 = m1
-                l2 = m2
+            x = (l+r)//2
+            y = m - x
+            if y >= R:
+                l = x+1
+            elif y < L:
+                r = x
+            elif (r1-l1) < (r2-l2):
+                return x, y
             else:
-                return m1, m2
+                return y, x
 
     def findMedianHelper(self, A1, S1, A2, S2):
         """Help to find the median between arrays."""
@@ -129,8 +127,6 @@ class Solution(object):
 
 A1 = [1, 2]
 A2 = [3, 4]
-
-import random
 
 solution = Solution().findMedianSortedArrays(A1, A2)
 print(solution)
