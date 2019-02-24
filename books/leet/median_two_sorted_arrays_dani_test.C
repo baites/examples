@@ -112,7 +112,7 @@ public:
 int main()
 {
     stype size = 40000000;
-    stype maxv = 1000000;
+    stype maxv = 100000;
 
     default_random_engine engine;
     uniform_int_distribution<int> dist2(-maxv, maxv);

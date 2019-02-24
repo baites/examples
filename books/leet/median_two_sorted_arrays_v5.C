@@ -1,8 +1,6 @@
 
 #include <algorithm>
-#include <chrono>
 #include <iostream>
-#include <random>
 #include <vector>
 
 using namespace std;
@@ -116,59 +114,67 @@ public:
                 break;
             }
         }
+        double median1;
         if(m1 < S1 && m2 < S2){
-            return min(A1[m1],A2[m2]);
+            median1 = min(A1[m1],A2[m2]);
         } else if (m2 == S2) {
-            return A1[m1];
+            median1 = A1[m1];
         } else {
-            return A2[m2];
+            median1 = A2[m2];
         }
+        if(S%2)
+            return median1;
+        stype n1;
+        stype n2;
+        if(m1 == 0) {
+            n1 = m1;
+            n2 = m2-1;
+        } else if(m2 == 0) {
+            n1 = m1-1;
+            n2 = m2;
+        } else {
+            n1 = m1-1;
+            n2 = m2;
+            if(
+                n1 > 0 && n2 < S2 && A1[n1-1] > A2[n2] ||
+                n2 > 0 && n1 < S1 && A2[n2-1] > A1[n1]
+            ) {
+                n1 = m1;
+                n2 = m2-1;
+            }
+        }
+        double median2;
+        if(n1 < S1 && n2 < S2){
+            median2 = min(A1[n1],A2[n2]);
+        } else if (n2 == S2) {
+            median2 = A1[n1];
+        } else {
+            median2 = A2[n2];
+        }
+        return 0.5*(median1+median2);
     }
 
     double findMedianSortedArrays(vtype& A1, vtype& A2) {
         stype S1 = A1.size();
         stype S2 = A2.size();
         stype S = S1 + S2;
-        double median1 = 0;
-        bool isEdge = isEdgeCase(median1, A1, S1, A2, S2);
+        double median = 0;
+        bool isEdge = isEdgeCase(median, A1, S1, A2, S2);
         if(isEdge)
-            return median1;
-        median1 = findMedianHelper(A1, S1, A2, S2);
-        if(S % 2)
-            return median1;
-        if(A1.back() > A2.back())
-            S1 -= 1;
-        else
-            S2 -= 1;
-        double median2 = findMedianHelper(A1, S1, A2, S2);
-        return 0.5*(median1 + median2);
+            return median;
+        return findMedianHelper(A1, S1, A2, S2);
     }
 };
 
 int main()
 {
-    stype size = 40000000;
-    stype maxv = 100000;
+    vector<int> A1 {1, 2};
+    vector<int> A2 {3, 4};
 
-    default_random_engine engine;
-    uniform_int_distribution<int> dist2(-maxv, maxv);
-
-    auto generator = [&dist2, &engine]() {
-        return dist2(engine);
-    };
-
-    vector<int> A1(size);
-    generate(begin(A1), end(A1), generator);
-    sort(begin(A1), end(A1));
-
-    vector<int> A2(size);
-    generate(begin(A2), end(A2), generator);
-    sort(begin(A2), end(A2));
-
-    typedef chrono::high_resolution_clock myclock;
-    myclock::time_point start = myclock::now();
     cout << Solution().findMedianSortedArrays(A1, A2) << endl;
-    myclock::duration delta = myclock::now() - start;
-    cout << "time: " << chrono::duration_cast<chrono::microseconds>(delta).count() << endl;
     return 0;
 }
+
+
+// Runtime: 40 ms, faster than 97.04% of C++ online submissions for Median of Two Sorted Arrays.
+// Memory Usage: 21.4 MB, less than 69.44% of C++ online submissions for Median of Two Sorted Arrays.
