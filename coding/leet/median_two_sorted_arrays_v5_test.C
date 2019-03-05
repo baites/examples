@@ -94,17 +94,13 @@ public:
         stype r2 = S2+1;
         stype m1 = 0;
         stype m2 = 0;
-        stype l = 0;
-        stype r = 0;
 
         // Binary search
         while(1) {
             if(m >= r1-1)
-                l = max(m-r1+1,l2);
-            else
-                l = l2;
-            r = min(m-l1+1,r2);
-            m2 = (l+r)/2;
+                l2 = max(m-r1+1,l2);
+            r2 = min(m-l1+1,r2);
+            m2 = (l2+r2)/2;
             m1 = m-m2;
             if(m1 > 0 && m2 < S2 && A1[m1-1] > A2[m2]){
                 r1 = m1;
