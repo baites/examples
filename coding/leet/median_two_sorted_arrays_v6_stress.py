@@ -71,22 +71,25 @@ class Solution(object):
         r1 = S1+1
         l2 = 0
         r2 = S2+1
+        stop = 0
 
         # Binary search
-        while 1:
+        while stop == 0:
             counter += 1
             l2 = max(m-r1+1,l2)
             r2 = min(m-l1+1,r2)
             m2 = (l2+r2)//2
             m1 = m-m2
+            stop = 1
             if m1 > 0 and m2 < S2 and A1[m1-1] > A2[m2]:
-               r1 = m1
-               l2 = m2+1
-            elif m2 > 0 and m1 < S1 and A2[m2-1] > A1[m1]:
+                r1 = m1
+                l2 = m2+1
+                stop = 0
+            if m2 > 0 and m1 < S1 and A2[m2-1] > A1[m1]:
                 l1 = m1+1
                 r2 = m2
-            else:
-                break
+                stop = 0
+
         if m1 < S1 and m2 < S2:
             median1 = min(A1[m1],A2[m2])
         elif m2 == S2:
@@ -166,6 +169,7 @@ for n in range(tries):
                 (solution_time - naive_time)
     agg_naive += naive_time - start
     agg_solution += solution_time - naive_time
+
 
     if naive == solution:
         print('naive = {}, solution = {} (x{})'.format(
