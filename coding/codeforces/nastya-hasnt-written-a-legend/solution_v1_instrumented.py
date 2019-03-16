@@ -27,14 +27,15 @@ def printnode(node):
     ))
 
 
-# Splay tree implementation
-
 def inorder(node):
     if node == None:
         return
     inorder(node.left)
     printnode(node)
     inorder(node.right)
+
+
+# Splay tree implementation
 
 
 def update(v):
