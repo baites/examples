@@ -111,7 +111,7 @@ def GetSum(ltree, i, j):
     rtree = mtree.split(end.key)
 
     # The middle tree contains all the intervals
-    # from the next to start until end interval
+    # from the next-to-start until end interval
     # So the root of the middle tree has the sum
     # except for contribution from start node.
     asum = mtree._root.asum
