@@ -1,8 +1,8 @@
 
 import random
 
-ninsts = 5
-maxsize = 20
+ninsts = 10
+maxsize = 40
 maxops = 30
 maxv = 20
 minv = -maxv
@@ -11,10 +11,11 @@ psum = 0.5
 
 dir = 'kzeros_tests'
 
-for n in range(4, ninsts):
+for n in range(0, ninsts):
     size = random.randint(2, maxsize)
-    a = [str(random.randint(minv,maxv)) for i in range(size)]
+    a = [random.randint(minv,maxv) for i in range(size)]
     a.sort()
+    a = [str(v) for v in a]
     with open('{}/{:04d}'.format(dir, n), 'w') as f:
         print(size, file=f)
         print(' '.join(a), file=f)

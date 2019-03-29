@@ -126,7 +126,8 @@ def Sum(ltree, i, j):
     # Rebuild the tree
     mtree.merge(rtree)
     if start.key.low == 1:
-        return asum
+        return asum - start.key.a * (i-start.key.low)\
+                    - end.key.a * (end.key.high-j)
     # Merge left side
     ltree.merge(mtree)
     # Return the sum after adding start and
@@ -160,7 +161,7 @@ def Add(tree, i, x):
             tree.insert(node)
             return
         # Interval has multiple points
-        if i-1 > node.key.low:
+        if i > node.key.low:
             tree.insert(
                 Node(node.key.low, i-1, node.key.a)
             )
@@ -174,7 +175,7 @@ def Add(tree, i, x):
     rtree = mtree.split(end.key)
 
     # Insert needed nodes in the left tree
-    if i-1 > node.key.low:
+    if i > node.key.low:
         tree.insert(
             Node(node.key.low, i-1, node.key.a)
         )
@@ -196,8 +197,8 @@ def main():
 
     tree = CreateTree(a)
 
-    for i in range(q):
-        #print(tree)
+    for j in range(q):
+        #print(j, tree)
         #print()
         line = input().split()
         if line[0] == 's':
@@ -207,6 +208,7 @@ def main():
         elif line[0] == '+':
             i = int(line[1])
             x = int(line[2])
+            #print('+ {} {}'.format(i, x))
             Add(tree, i, x)
         else:
             print('unknown ops')
