@@ -97,7 +97,7 @@ def CreateTree(a):
     return tree
 
 
-def GetSum(ltree, i, j):
+def Sum(ltree, i, j):
     """Compute the sum between elements based on intervals."""
 
     # Search for interal where index i is present O(log N)
@@ -129,8 +129,10 @@ def GetSum(ltree, i, j):
         return asum
     # Merge left side
     ltree.merge(mtree)
-    # Return the sum after adding start interval contribution
-    return asum + start.key.a * (start.key.high-i+1)
+    # Return the sum after adding start and
+    # end interval fractional contribution
+    return asum + start.key.a * (start.key.high-i+1)\
+                - end.key.a * (end.key.high-j)
 
 
 def Add(tree, i, x):
@@ -153,28 +155,32 @@ def Add(tree, i, x):
     if start.key == end.key:
         node = tree.delete(start.key)
         # Interval has one one point
-        if start.key.high == start.key.low:
+        if node.key.low == node.key.high:
             node.key.a = a
             tree.insert(node)
+            return
         # Interval has multiple points
-        else:
-            high = node.key.high
-            node.key.high = i-1
-            tree.insert(node)
-            tree.insert(Node(i, high, a))
+        if i-1 > node.key.low:
+            tree.insert(
+                Node(node.key.low, i-1, node.key.a)
+            )
+        tree.insert(Node(i, node.key.high, a))
         return
 
     # Remove all the intervals in the middle
     # by splitting the tree O(?)
     mtree = tree.split(start.key)
-    tree.delete(start.key)
+    node = tree.delete(start.key)
     rtree = mtree.split(end.key)
 
-    # Create a new interval covering
-    # all the updated values O(log N)
-    node = Node(start.key.low, end.key.low, a)
-    # Insert the node in the left tree
-    tree.insert(node)
+    # Insert needed nodes in the left tree
+    if i-1 > node.key.low:
+        tree.insert(
+            Node(node.key.low, i-1, node.key.a)
+        )
+    tree.insert(
+        Node(i, end.key.high, a)
+    )
     # Merge the right tree discarding the middle
     tree.merge(rtree)
 
@@ -197,7 +203,7 @@ def main():
         if line[0] == 's':
             l = int(line[1])
             r = int(line[2])
-            print(GetSum(tree, l, r))
+            print(Sum(tree, l, r))
         elif line[0] == '+':
             i = int(line[1])
             x = int(line[2])

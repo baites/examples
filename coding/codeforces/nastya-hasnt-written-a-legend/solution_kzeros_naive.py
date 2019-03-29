@@ -22,7 +22,7 @@ def main():
     q = int(input().strip())
 
     for i in range(q):
-        print(a)
+        #print(a)
         line = input().split()
         if line[0] == 's':
             l = int(line[1])
@@ -35,7 +35,7 @@ def main():
         else:
             print('unknown ops')
 
-    print(a)
+    #print(a)
 
 if __name__ == "__main__":
     main()
