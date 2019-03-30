@@ -10,7 +10,7 @@ minv = -maxv
 maxx = 100
 psum = 0.1
 
-dir = 'kzeros_tests'
+dir = 'tests'
 
 for n in range(mininst, maxinst):
     size = random.randint(2, maxsize)
