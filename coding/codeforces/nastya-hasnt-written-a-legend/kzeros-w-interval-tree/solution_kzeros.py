@@ -198,8 +198,8 @@ def main():
     tree = CreateTree(a)
 
     for j in range(q):
-        #print(j, tree)
-        #print()
+        print(tree)
+        print()
         line = input().split()
         if line[0] == 's':
             l = int(line[1])
