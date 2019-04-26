@@ -85,11 +85,11 @@ import time
 
 #random.seed(1234)
 #random.getstate()
-tries = 200
-#maxs = 4000000
-#maxv = 10000000
-maxs = 600
-maxv = 400
+tries = 10
+maxs = 4000000
+maxv = 10000000
+#maxs = 600
+#maxv = 400
 
 agg_refs = 0.0
 agg_test = 0.0
