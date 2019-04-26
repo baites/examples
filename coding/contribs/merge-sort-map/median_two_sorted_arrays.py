@@ -67,8 +67,17 @@ class Solution(object):
         # Get the value of merge-sort array
         return self.getMergeSortArrayValue(A, B, nA, nB)
 
-n = 7
+
+    def findMedianSortedArrays(self, A, B):
+        """Compute the median of two sorted arrays."""
+        S = len(A) + len(B)
+        return 0.5 * (
+            self.mergeSortMap(A, B, ((S-1)//2)+1) +\
+            self.mergeSortMap(A, B, (S//2)+1)
+        )
+
+
 A = [-2, -2, -1, 0, 1, 1, 2]
 B = [-1, -1,  0, 0, 1, 1, 2]
 
-print(Solution().mergeSortMap(A, B, n))
+print(Solution().findMedianSortedArrays(A, B))

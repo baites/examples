@@ -17,6 +17,16 @@ class Solution(object):
         """Check for the negative of the head-tail condition."""
         return nX > 0 and nY < len(Y) and X[nX-1] > Y[nY]
 
+    def getMergeSortArrayValue(self, A, B, nA, nB):
+        """Get the value of merge-sort array."""
+        if nA == 0:
+            value = B[nB-1]
+        elif nB == 0:
+            value = A[nA-1]
+        else:
+            value = max(A[nA-1], B[nB-1])
+        return value
+
     def mergeSortMap(self, A, B, n):
         """Help to find the median between arrays."""
 
@@ -30,7 +40,7 @@ class Solution(object):
         if n < 1 or n > SA + SB:
             raise IndexError('merge-sort map index out of range')
 
-        # Edge case
+        # Edge case one empty array
         if SA == 0:
             return B[n-1]
         if SB == 0:
@@ -47,23 +57,27 @@ class Solution(object):
 
         # Binary search
         while 1:
+            # Binapartition of nA range
             nA = (left + right)//2
+            # Derive value for nB
             nB = n - nA
+            # Check if nB is out of range,
+            # meaning nA too small.
             if nB > SB:
                 left = nA + 1
+            # Check if first head/tail condition tails
+            # meaning that nA is too large
             elif self.isNotHeadTailCondition(A, B, nA, nB):
                 right = nA - 1
+            # Check if first head/tail condition tails
+            # meaning that nA is too small
             elif self.isNotHeadTailCondition(B, A, nB, nA):
                 left = nA + 1
+            # Break if all conditions are met
             else:
                 break
-        if nA == 0:
-            value = B[nB-1]
-        elif nB == 0:
-            value = A[nA-1]
-        else:
-            value = max(A[nA-1], B[nB-1])
-        return value
+        # Get the value of merge-sort array
+        return self.getMergeSortArrayValue(A, B, nA, nB)
 
 
 import random
@@ -71,11 +85,11 @@ import time
 
 #random.seed(1234)
 #random.getstate()
-tries = 20
-maxs = 4000000
-maxv = 10000000
-#maxs = 600
-#maxv = 400
+tries = 200
+#maxs = 4000000
+#maxv = 10000000
+maxs = 600
+maxv = 400
 
 agg_refs = 0.0
 agg_test = 0.0
