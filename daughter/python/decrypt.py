@@ -8,6 +8,7 @@ def tostr(plaintext):
 
 alphabet = [chr(inx) for inx in range(ord('A'),ord('Z')+1)]
 alphabet.append(' ')
+alphabet.append('.')
 alphamap = { alphabet[inx]:inx for inx in range(len(alphabet)) }
 
 key = sys.argv[1]
