@@ -71,8 +71,13 @@ def Update(tree, left, right, x):
 
     end = len(k)
 
+    counter = 0
+
     def _update(node, start, end, x, y = None):
         """Update interval value recursively."""
+        nonlocal counter
+        counter += 1
+
         # Interval [left,right] is totally out of segment
         if right < start or end < left:
             if y is not None:
@@ -99,6 +104,7 @@ def Update(tree, left, right, x):
         asum[node] = asum[2*node+1] + asum[2*node+2]
 
     _update(0, 0, end, (left, x))
+    print('Update: ', counter)
     return tree
 
 
@@ -107,8 +113,12 @@ def Query(tree, left, right):
     aval, asum = tree
     end = len(k)
 
+    #counter = 0
+
     def _query(node, start, end):
         """Update interval value recursively."""
+        #nonlocal counter
+        #counter += 1
 
         # Interval [left,right] is totally out of segment [start,end]
         if right < start or end < left:
@@ -133,6 +143,7 @@ def Query(tree, left, right):
         return q1+q2
 
     value = _query(0, 0, end)
+    #print('Query: ', counter)
     return value
 
 
@@ -144,10 +155,10 @@ def Search(tree, l, x):
     global a, k
     right = len(k)
     left = l
-    count = 0
+    counter = 0
     # Binary search to locate end point after update
     while left < right:
-        count += 1
+        counter += 1
         mid = (left + right)//2
         q  = IntVal(x, l, mid) + k[mid]
         v  = Query(tree, mid+1, mid+1)
@@ -156,6 +167,7 @@ def Search(tree, l, x):
             left = mid+1
         else:
             right = mid
+    print('Search: ', counter)
     return left
 
 

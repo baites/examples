@@ -1,11 +1,11 @@
 
 import random
 
-mininst = 0
-maxinst = 4
+mininst = 5
+maxinst = 6
 size = 100000
 maxops = 50000
-maxv = 100
+maxv = 1000000
 #maxv = 100
 minv = -maxv
 maxk = 1000000
