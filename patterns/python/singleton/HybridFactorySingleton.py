@@ -33,7 +33,8 @@ print('A.value = {}'.format(A.value))
 # Inspect
 print(repr(A))
 
-# Confusion, trying to inherent from an Object
+# Confusion, trying to inherent from an object
+# Raise TypeError: a singleton instance cannot be reinstantiated
 class B(A):
     def __init__(self):
         super().__init__('y')
