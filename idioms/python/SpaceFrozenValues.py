@@ -31,6 +31,6 @@ print(fv.x) # print "2"
 fv.x = 3 # raise "AttributeError: Cannot reassign members"
 fv.y = {'name': 'y', 'value': 2} # bind attribute y
 print(fv.y) # print "{'name': 'y', 'value': 2}"
-fv.y['name'] = 'yprime' # mutable object can be changed
-print(fv.y) # print "{'name': 'yprime', 'value': 2}"
+fv.y['name'] = 'yprime' # you can try to change mutable objects
+print(fv.y) # print "{'name': 'y', 'value': 2}"
 fv.y = {} # raise "AttributeError: Cannot reassign members"

@@ -7,7 +7,7 @@ def SpaceConstants():
                 "Cannot reassign members"
             )
         self.__dict__[name] = value
-    cls = type('ConstantSpace', (), {
+    cls = type('SpaceConstants', (), {
         '__setattr__': setattr
     })
     return cls()
