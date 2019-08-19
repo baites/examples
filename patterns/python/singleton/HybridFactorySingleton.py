@@ -36,4 +36,4 @@ print(repr(A))
 # Confusion, trying to inherent from an Object
 class B(A):
     def __init__(self):
-        super.__init__('y')
+        super().__init__('y')
