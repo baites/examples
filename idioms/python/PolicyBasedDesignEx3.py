@@ -37,6 +37,7 @@ PrintPrefixSuffixMessage = PrintOutput(
     AddSuffix(AddPrefix(InputMessage))
 )
 message = PrintPrefixSuffixMessage()
+print(PrintPrefixSuffixMessage.__mro__)
 message.set_prefix('Victor says: ')
 message.set_suffix(' and goodbye!')
 message.run()
