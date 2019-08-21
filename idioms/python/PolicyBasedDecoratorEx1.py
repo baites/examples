@@ -1,14 +1,20 @@
 #! /usr/bin/env python
 
 
-def hostclass(host):
-    def wrapper(*policies):
-        name = '{}('.format(host.__name__)
-        for policy in policies[:-1]:
-            name += '{},'.format(arg.__name__)
-        name += '{})'.format(policies[-1].__name__)
-        return type(name, (host,)+policies,{})
-    return wrapper
+def hostclass(*defaults):
+    def decorator(host):
+        def decoration(*policies):
+            if len(policies) == 0:
+                if len(defaults) == 0:
+                    raise ValueError('No default policies available.')
+                policies = defaults
+            name = '{}('.format(host.__name__)
+            for policy in policies[:-1]:
+                name += '{},'.format(arg.__name__)
+            name += '{})'.format(policies[-1].__name__)
+            return type(name, (host,)+policies,{})
+        return decoration
+    return decorator
 
 
 class PrintOutput:
@@ -26,18 +32,20 @@ class SaveOutput:
             file.write(message)
 
 
-@hostclass
+@hostclass(PrintOutput)
 class HelloWorld:
     """Creates a host class."""
     def run(self):
         """Print message."""
         self._output('Hello world!')
 
+PrintHelloWorld = HelloWorld()
+print(PrintHelloWorld)
+hw = PrintHelloWorld()
+hw.run() # print "Hello World!"
 
 PrintHelloWorld = HelloWorld(PrintOutput)
-
 print(PrintHelloWorld)
-
 hw = PrintHelloWorld()
 hw.run() # print "Hello World!"
 
