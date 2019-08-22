@@ -1,6 +1,6 @@
 
 def BaseClass(name, fields, parents=()):
-    
+
     def property_getter(field):
         def getter(self):
             return getattr(self, '_{}'.format(field))
@@ -21,7 +21,7 @@ def BaseClass(name, fields, parents=()):
         )
 
     globals()[name] = type(name, parents, dict)
-    return type(name, parents, dict)
+    return globals()[name]
 
 
 BaseClass('AuthorBase',(
