@@ -32,7 +32,6 @@ def PrintOutput(Input):
             print(super().run())
     return _
 
-PrefixMessage = AddPrefix(InputMessage)
 PrintPrefixSuffixMessage = PrintOutput(
     AddSuffix(AddPrefix(InputMessage))
 )
