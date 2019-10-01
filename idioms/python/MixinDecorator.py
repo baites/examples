@@ -41,23 +41,18 @@ class HelloWorld:
 
 
 PrintHelloWorld = HelloWorld()
-
-print(PrintHelloWorld)
-print(PrintHelloWorld.__mro__)
+print(PrintHelloWorld) # print: <class '__main__.HelloWorld(PrintOutput)'>
 
 hw = PrintHelloWorld()
 hw.run() # print "Hello World!"
 
 PrintHelloWorld = HelloWorld(PrintOutput)
-
-print(PrintHelloWorld)
-print(PrintHelloWorld.__mro__)
-
+print(PrintHelloWorld) # <class '__main__.HelloWorld(PrintOutput)'>
 hw = PrintHelloWorld()
 hw.run() # print "Hello World!"
 
 SaveHelloWorld = HelloWorld(SaveOutput)
-
+print(SaveHelloWorld) # <class '__main__.HelloWorld(SaveOutput)'>
 hw = SaveHelloWorld()
 hw.set_filename('output.txt')
 hw.run() # save "Hello World!" in output.txt
