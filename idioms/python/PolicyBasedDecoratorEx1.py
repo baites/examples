@@ -16,12 +16,10 @@ def hostclass(*defaults):
         return decoration
     return decorator
 
-
 class PrintOutput:
     """Implement print output mixin."""
     def _output(self, message):
         print(message)
-
 
 class SaveOutput:
     """Implement save output mixin."""
@@ -31,7 +29,6 @@ class SaveOutput:
         with open(self.filename, 'w') as file:
             file.write(message)
 
-
 @hostclass(PrintOutput)
 class HelloWorld:
     """Creates a host class."""
@@ -40,17 +37,17 @@ class HelloWorld:
         self._output('Hello world!')
 
 PrintHelloWorld = HelloWorld()
-print(PrintHelloWorld)
+print(PrintHelloWorld) # <class '__main__.HelloWorld(PrintOutput)'>
 hw = PrintHelloWorld()
 hw.run() # print "Hello World!"
 
 PrintHelloWorld = HelloWorld(PrintOutput)
-print(PrintHelloWorld)
+print(PrintHelloWorld) # <class '__main__.HelloWorld(PrintOutput)'>
 hw = PrintHelloWorld()
 hw.run() # print "Hello World!"
 
 SaveHelloWorld = HelloWorld(SaveOutput)
-
+print(SaveHelloWorld) # <class '__main__.HelloWorld(SaveOutput)'>
 hw = SaveHelloWorld()
 hw.set_filename('output.txt')
 hw.run() # save "Hello World!" in output.txt
