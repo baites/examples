@@ -36,7 +36,7 @@ class Solution(object):
                 return s[m:n+1]
         return s[0]
 
-s = 'a'*1000
+s = 'a'*2000
 print(Solution().longestPalindrome(s))
 
 # Runtime: 7388 ms, faster than 9.08% of Python online submissions for Longest Palindromic Substring.
