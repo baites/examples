@@ -13,16 +13,16 @@ class Solution(object):
         # Computing hashes
         for i in range(length):
             c = ord(string[i])
-            d = ord(string[length-1-i])
+            #d = ord(string[length-1-i])
             forward[i+1] = (forward[i] + c*poly[i]) % self._prime
-            backward[i+1] = (backward[i] + d*poly[i]) % self._prime
+            backward[i+1] = (self._base*backward[i] + c) % self._prime
             poly[i+1] = (poly[i] * self._base) % self._prime
         return forward, backward, poly
 
     def __init__(self):
         """Contructor."""
         #self._prime = 2**61-1
-        self._prime = 331
+        self._prime = 10**9+9
         #self._base = random.randint(1, self._prime - 1)
         self._base = 31
 
@@ -47,11 +47,11 @@ class Solution(object):
         for length in range(size, 1, -1):
             for offset in range(size - length + 1):
                 fhash = (
-                    (forward[length+offset]-forward[offset])*poly[size-offset]
+                    forward[length+offset]-forward[offset]
                 )%self._prime
-                bhash = (
-                    (backward[size-offset]-backward[size-length-offset])*poly[length+offset]
-                )%self._prime
+                bhash = (poly[offset]*backward[length+offset]) % self._prime
+                bhash -= (poly[length+offset]*backward[offset]) % self._prime
+                bhash %= self._prime
                 if fhash == bhash and\
                     self._isPalindrome(string, offset, offset+length-1):
                     return string[offset:offset+length]
@@ -60,7 +60,5 @@ class Solution(object):
 s = 'abacdfgdcaba'
 print(Solution().longestPalindrome(s))
 
-# Runtime: 4472 ms, faster than 27.37% of Python3 online submissions for Longest Palindromic Substring.
-# Memory Usage: 12.8 MB, less than 100.00% of Python3 online submissions for Longest Palindromic Substring.
-# Runtime: 3336 ms, faster than 32.12% of Python online submissions for Longest Palindromic Substring.
-# Memory Usage: 11.9 MB, less than 58.90% of Python online submissions for Longest Palindromic Substring.
+# Runtime: 5772 ms, faster than 14.90% of Python3 online submissions for Longest Palindromic Substring.
+# Memory Usage: 12.7 MB, less than 100.00% of Python3 online submissions for Longest Palindromic Substring.

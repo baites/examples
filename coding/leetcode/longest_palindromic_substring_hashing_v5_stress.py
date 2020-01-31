@@ -37,12 +37,10 @@ class Solution(object):
         backward = [0]*(length + 1)
         poly = [1]*(length + 1)
         # Computing hashes
-        c0 = ord('a')
         for i in range(length):
             c = ord(string[i])
-            d = ord(string[length-1-i])
             forward[i+1] = (forward[i] + c*poly[i]) % self._prime
-            backward[i+1] = (backward[i] + d*poly[i]) % self._prime
+            backward[i+1] = (self._base*backward[i] + c) % self._prime
             poly[i+1] = (poly[i] * self._base) % self._prime
         return forward, backward, poly
 
@@ -65,28 +63,25 @@ class Solution(object):
 
     def longestPalindrome(self, string):
         """Solve the problem."""
-
         # Get string size
         size = len(string)
-
+        if size == 0:
+            return ''
         # Compute hash strings
         forward, backward, poly = self._compute_polyhashes(string)
-
         # Search for a palindrome substring
         for length in range(size, 1, -1):
             for offset in range(size - length + 1):
                 fhash = (
-                    (forward[length+offset]-forward[offset])*poly[size-offset]
+                    forward[length+offset]-forward[offset]
                 )%self._prime
-                bhash = (
-                    (backward[size-offset]-backward[size-length-offset])*poly[length+offset]
-                )%self._prime
-                #print(offset, length+offset, size-length-offset, size-offset, fhash, bhash)
+                bhash = (poly[offset]*backward[length+offset]) % self._prime
+                bhash -= (poly[length+offset]*backward[offset]) % self._prime
+                bhash %= self._prime
                 if fhash == bhash and\
                     self._isPalindrome(string, offset, offset+length-1):
-                    #return string[offset:offset+length]
                     return length
-        return string[0]
+        return 1
 
 
 import random
