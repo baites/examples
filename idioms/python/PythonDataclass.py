@@ -51,4 +51,4 @@ def example_unfrozen_dataclass():
 
 example_frozen_dataclass()
 print()
-example_unfrozen_a_dataclass()
+example_unfrozen_dataclass()

@@ -79,6 +79,6 @@ def example_unfrozen_class():
     print(author.desc)
 
 
-example_base_class_instantation()
+example_frozen_class()
 print()
-example_derived_class_instantation()
+example_unfrozen_class()
