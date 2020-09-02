@@ -5,13 +5,13 @@
 def CreateClass(name, fields, parents=(), frozen=False):
     """Create a base class with a given fields and parents."""
 
-    def property_getter(field):
+    def getter(field):
         return lambda self: getattr(self, '_{}'.format(field))
 
-    def property_setter(field):
+    def setter(field):
         return lambda self, value: setattr(self, '_{}'.format(field), value)
 
-    def property_delattr(field):
+    def deleter(field):
         return lambda self: delattr(self, '_{}'.format(field))
 
     def init(self, **kwargs):
@@ -26,13 +26,13 @@ def CreateClass(name, fields, parents=(), frozen=False):
     for field in fields:
         if frozen:
             members[field] = property(
-                property_getter(field)
+                getter(field)
             )
         else:
             members[field] = property(
-                property_getter(field),
-                property_setter(field),
-                property_delattr(field)
+                getter(field),
+                setter(field),
+                deleter(field)
             )
 
     globals()[name] = type(name, parents, members)
