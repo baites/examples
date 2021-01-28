@@ -7,11 +7,11 @@ def generate_plot():
     """Generate a plot showinf continuum dyad orbichord."""
     # Size of the coordinates
 
-    limit = 2
+    limit = 4
 
     # Plotting fundamental domain
     fundamental_domain = (
-        (0, 0), (0, 1), (1, 1), (1, 0),
+        [0, 0], [0, 1], [1, 1],
     )
 
     # Probe points
@@ -34,6 +34,10 @@ def generate_plot():
             lambda x: (x[0], x[1] - 1),
             lambda x: (x[0] + 1, x[1] - 1),
         ),
+        (
+            lambda x: (x[0], x[1]),
+            lambda x: (x[1], x[0])
+        ),
     )
 
     # Identification lines
@@ -42,18 +46,22 @@ def generate_plot():
         {"begin": [1, 0], "end": [1, 1], "color": "blue"},
         {"begin": [0, 0], "end": [1, 0], "color": "blue"},
         {"begin": [0, 1], "end": [1, 1], "color": "blue"},
+        {"begin": [0, 0], "end": [1, 1], "color": "orange"}
     )
+
+    transform = lambda x1, x2: (x1+x2, x2-x1)
 
     # execute only if run as a script
     plot_dyad_orbichord(
         x_lim=[-limit/2, limit],
-        y_lim=[-limit/2, limit],
-        x_label="$y_1$",
-        y_label="$y_2$",
+        y_lim=[-limit+1, limit-1],
+        x_label="$\\phi_1$",
+        y_label="$\\phi_2$",
         fundamental_domain=fundamental_domain,
         probes=probes,
         actions=actions,
         id_lines=id_lines,
+        transform=transform
     )
 
 

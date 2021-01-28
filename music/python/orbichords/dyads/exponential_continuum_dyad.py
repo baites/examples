@@ -1,8 +1,6 @@
 """Tool to generate continuum dyad."""
 
 import math
-from matplotlib.patches import Polygon
-
 from dyad_helper import plot_dyad_orbichord
 
 
@@ -12,32 +10,29 @@ def generate_plot():
     limit = 2
 
     # Plotting fundamental domain
-    fundamental_domain = Polygon(
-        [[-limit, -limit], [-limit, limit], [limit, limit]],
-        alpha=0.2,
-        closed=True,
-        fill=False,
-        linewidth=0,
-        hatch="\\\\",
+    fundamental_domain = (
+        (-limit, -limit),
+        (-limit, limit),
+        (limit, limit),
     )
 
     # Probe points
-    probes = [
-        {"label": "A", "x": math.log(1, 2), "y": math.log(2, 2), "color": "black"}
-    ]
+    probes = (
+        {"label": "A", "x": math.log(1, 2), "y": math.log(2, 2), "color": "black"},
+    )
 
     # Action over probes
     actions = ((lambda x: (x[0], x[1]), lambda x: (x[1], x[0])),)
 
     # Identification lines
-    id_lines = [{"begin": [-limit, -limit], "end": [limit, limit], "color": "blue"}]
+    id_lines = ({"begin": [-limit, -limit], "end": [limit, limit], "color": "blue"},)
 
     # execute only if run as a script
     plot_dyad_orbichord(
-        [-limit, limit],
-        [-limit, limit],
-        xlabel="$y_1$",
-        ylabel="$y_2$",
+        x_lim=[-limit, limit],
+        y_lim=[-limit, limit],
+        x_label="$y_1$",
+        y_label="$y_2$",
         fundamental_domain=fundamental_domain,
         probes=probes,
         actions=actions,
