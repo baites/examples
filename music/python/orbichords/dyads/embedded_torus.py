@@ -16,6 +16,7 @@ COLORS = ['black', 'darkslategray', 'red', 'green']
 
 figure = canvas.figure(figsize=(FIGURE_SIZE,FIGURE_SIZE))
 ax = figure.add_subplot(111, projection='3d')
+ax.view_init(90, -90)
 
 ax.set_xlabel('x axis')
 ax.set_ylabel('y axis')
@@ -42,7 +43,7 @@ Z = (MINOR_RADIUS+0.2)*np.sin(u)
 ax.scatter(X, Y, Z, c=COLORS)
 
 # Save the picture
-# figure.savefigure("torus.png", dpi=100, transparent = False)
+#figure.savefigure("torus.png", dpi=100, transparent = False)
 
 # Plot the picture
 canvas.show()

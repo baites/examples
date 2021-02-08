@@ -14,7 +14,7 @@ def generate_plot():
     )
 
     # Probe points
-    probes = ({"label": "A", "x": 1, "y": 2, "color": "black"},)
+    probes = ({"label": "A", "x": (1, 2), "color": "black"},)
 
     # Action over probes
     actions = (

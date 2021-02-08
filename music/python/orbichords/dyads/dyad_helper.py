@@ -39,10 +39,10 @@ def plot_dyad_orbichord(
     y_label: str,
     fundamental_domain: tuple,
     probes: tuple,
-    simplex: Callable[[float, float], tuple] = lambda x1, x2: (x1, x2),
+    simplex: Callable[tuple, tuple] = lambda x: x,
     id_lines: tuple = None,
-    actions: tuple = ((lambda x1, x2: (x1, x2),),),
-    transform: Callable[[float, float], tuple] = lambda x1, x2: (x1, x2),
+    actions: tuple = ((lambda x: x,),),
+    transform: Callable[tuple, tuple] = lambda x: x,
 ):
     """Generate the plot for continuum dyad orbichords.
 
@@ -122,7 +122,7 @@ def plot_dyad_orbichord(
     )
 
     # Plotting fundamental domain
-    fundamental_domain = [transform(*simplex(*point)) for point in fundamental_domain]
+    fundamental_domain = [transform(simplex(point)) for point in fundamental_domain]
     domain = Polygon(
         fundamental_domain,
         alpha=0.2,
@@ -145,11 +145,9 @@ def plot_dyad_orbichord(
     for action_ntuple in actions:
         for probe in probes:
             x = probe["x"]
-            y = probe["y"]
             color = probe["color"]
-            x, y = simplex(x, y)
-            acted_pair = apply_actions(action_ntuple, (x, y))
-            trans_x, trans_y = transform(*acted_pair)
+            acted_pair = apply_actions(action_ntuple, simplex(x))
+            trans_x, trans_y = transform(acted_pair)
             x_probes.append(trans_x)
             y_probes.append(trans_y)
             c_probes.append(probe["color"])
@@ -161,13 +159,12 @@ def plot_dyad_orbichord(
         for probe in probes:
             config = annotation_config
             config["color"] = probe["color"]
-            x, y = simplex(probe["x"], probe["y"])
             if identity_action:
                 label = "${}$".format(probe["label"])
             else:
                 label = "${}'$".format(probe["label"])
-            acted_pair = apply_actions(action_ntuple, (x, y))
-            trans_x, trans_y = transform(*acted_pair)
+            acted_pair = apply_actions(action_ntuple, simplex(probe['x']))
+            trans_x, trans_y = transform(acted_pair)
             plot.annotate(
                 label,
                 (trans_x + shift_label * xscale, trans_y + shift_label * xscale),
@@ -182,12 +179,12 @@ def plot_dyad_orbichord(
                 begin = id_line["begin"]
                 end = id_line["end"]
                 color = id_line["color"]
-                begin = simplex(*begin)
-                end = simplex(*end)
+                begin = simplex(begin)
+                end = simplex(end)
                 acted_begin = apply_actions(action_ntuple, begin)
                 acted_end = apply_actions(action_ntuple, end)
-                trans_begin = transform(*acted_begin)
-                trans_end = transform(*acted_end)
+                trans_begin = transform(acted_begin)
+                trans_end = transform(acted_end)
                 plot.annotate(
                     "",
                     trans_end,

@@ -18,7 +18,13 @@ def generate_plot():
 
     # Probe points
     probes = (
-        {"label": "A", "x": math.log(1, 2), "y": math.log(2, 2), "color": "black"},
+        {
+            "label": "A",
+            "x": (
+                math.log(1, 2), 
+                math.log(2, 2)),
+            "color": "black"
+        },
     )
 
     # Action over probes

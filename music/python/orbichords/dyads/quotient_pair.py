@@ -16,10 +16,10 @@ def generate_plot():
 
     # Probe points
     probes = (
-        {"label": "A", "x": 0.25, "y": 0.75, "color": "black"},
-        {"label": "B", "x": 0.50, "y": 0.75, "color": "darkslategray"},
-        {"label": "C", "x": 0.00, "y": 0.50, "color": "red"},
-        {"label": "D", "x": 0.25, "y": 0.50, "color": "green"},
+        {"label": "A", "x": (0.25, 0.75), "color": "black"},
+        {"label": "B", "x": (0.50, 0.75), "color": "darkslategray"},
+        {"label": "C", "x": (0.00, 0.50), "color": "red"},
+        {"label": "D", "x": (0.25, 0.50), "color": "green"},
     )
 
     # Actions over probes

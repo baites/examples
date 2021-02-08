@@ -9,10 +9,12 @@ FIGURE_SIZE = 6
 MINOR_RADIUS = 2
 MAYOR_RADIUS = 4
 
+
 # Ordered pitch pair coordinates
 X1 = (0.25, 0.50, 0.00, 0.25)
 X2 = (0.75, 0.75, 0.50, 0.50)
 COLORS = ['black', 'darkslategray', 'red', 'green']
+
 
 #pylint: disable=invalid-name
 def simplex(x1, x2):
@@ -44,6 +46,7 @@ def transform(X1, X2):
 
 figure = canvas.figure(figsize=(FIGURE_SIZE,FIGURE_SIZE))
 ax = figure.add_subplot(111, projection='3d')
+ax.view_init(90, -90)
 
 ax.set_xlabel('x axis')
 ax.set_ylabel('y axis')
@@ -71,7 +74,7 @@ Z = MINOR_RADIUS * v * np.sin(u/2.0)
 ax.scatter(X, Y, Z, c=COLORS)
 
 # Save the picture
-# figure.savefigure("torus.png", dpi=100, transparent = False)
+#figure.savefigure("torus.png", dpi=100, transparent = False)
 
 # Plot the picture
 canvas.show()

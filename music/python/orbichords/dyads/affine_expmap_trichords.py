@@ -13,10 +13,10 @@ def generate_plot():
 
     # Plotting fundamental domain
     fundamental_domain = (
-        (-limit, 0),
-        (-limit, limit),
-        (limit, limit),
-        (limit, 0),
+        (0, 0, 0),
+        (0, 0, limit),
+        (-limit, 0, limit),
+        (0, limit, limit),
     )
 
     # Probe points
@@ -24,29 +24,41 @@ def generate_plot():
         {
             "label": "A",
             "x": (
-                log(1, 2) + log(2, 2),
-                log(2, 2) - log(1, 2)
+                0.5,
+                1.0,
+                2.0
             ),
             "color": "black",
         },
     )
 
     # Action over probes
-    actions = ((lambda x: (x[0], x[1]), lambda x: (x[0], -x[1])),)
+    actions = ((
+        lambda x: (x[0], x[1], x[2]),
+        lambda x: (x[1], x[0], x[2]),
+        lambda x: (x[0], x[2], x[1]),
+        lambda x: (x[2], x[1], x[0]),
+        lambda x: (x[2], x[0], x[1]),
+        lambda x: (x[1], x[2], x[0]),                        
+    ),)
 
     # Identification lines
     id_lines = ({"begin": [-limit, 0], "end": [limit, 0], "color": "blue"},)
+
+    # Identification lines
+    transform = lambda x: (x[1]-x[0], x[2]-x[1])
 
     # execute only if run as a script
     plot_dyad_orbichord(
         x_lim=(-limit, limit),
         y_lim=(-limit, limit),
-        x_label="$\\phi_1$",
-        y_label="$\\phi_2$",
+        x_label="$\\phi_2$",
+        y_label="$\\phi_3$",
         fundamental_domain=fundamental_domain,
         probes=probes,
-        id_lines=id_lines,
+        #id_lines=id_lines,
         actions=actions,
+        transform=transform
     )
 
 

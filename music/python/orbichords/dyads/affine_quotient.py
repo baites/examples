@@ -16,10 +16,10 @@ def generate_plot():
 
     # Probe points
     probes = (
-        {"label": "A", "x": 0.25, "y": 0.75, "color": "black"},
-        {"label": "B", "x": 0.50, "y": 0.75, "color": "darkslategray"},
-        {"label": "C", "x": 0.00, "y": 0.50, "color": "red"},
-        {"label": "D", "x": 0.25, "y": 0.50, "color": "green"},
+        {"label": "A", "x": (0.25, 0.75), "color": "black"},
+        {"label": "B", "x": (0.50, 0.75), "color": "darkslategray"},
+        {"label": "C", "x": (0.00, 0.50), "color": "red"},
+        {"label": "D", "x": (0.25, 0.50), "color": "green"},
     )
 
     # Actions over probes
@@ -50,7 +50,7 @@ def generate_plot():
         {"begin": [0, 0], "end": [1, 1], "color": "orange"}
     )
 
-    transform = lambda x1, x2: (x1+x2, x2-x1)
+    transform = lambda x: (x[0]+x[1], x[1]-x[0])
 
     # execute only if run as a script
     plot_dyad_orbichord(
