@@ -1,6 +1,5 @@
 """Tool to generate continuum dyad."""
 
-from math import log
 from dyad_helper import plot_dyad_orbichord
 
 
@@ -39,11 +38,8 @@ def generate_plot():
         lambda x: (x[0], x[2], x[1]),
         lambda x: (x[2], x[1], x[0]),
         lambda x: (x[2], x[0], x[1]),
-        lambda x: (x[1], x[2], x[0]),                        
+        lambda x: (x[1], x[2], x[0]),
     ),)
-
-    # Identification lines
-    id_lines = ({"begin": [-limit, 0], "end": [limit, 0], "color": "blue"},)
 
     # Identification lines
     transform = lambda x: (x[1]-x[0], x[2]-x[1])
@@ -56,7 +52,6 @@ def generate_plot():
         y_label="$\\phi_3$",
         fundamental_domain=fundamental_domain,
         probes=probes,
-        #id_lines=id_lines,
         actions=actions,
         transform=transform
     )

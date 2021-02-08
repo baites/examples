@@ -21,7 +21,7 @@ def generate_plot():
         {
             "label": "A",
             "x": (
-                math.log(1, 2), 
+                math.log(1, 2),
                 math.log(2, 2)),
             "color": "black"
         },
