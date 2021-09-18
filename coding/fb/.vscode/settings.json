@@ -1,0 +1,4 @@
+{
+    "python.pythonPath": "/home/baites/.virtualenvs/pystash/bin/python",
+    "python.formatting.provider": "black"
+}
