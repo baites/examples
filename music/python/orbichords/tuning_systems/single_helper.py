@@ -66,7 +66,7 @@ def plot_single_orbichord(
 
     # Compute scale
     xscale = x_lim[1] - x_lim[0]
-    shift_label = 0.025
+    shift_label = 0.015
 
     # Set plot spines at 0
     for spine in ["left", "bottom"]:
@@ -128,7 +128,7 @@ def plot_single_orbichord(
             trans_x = transform(acted_pair)
             plot.annotate(
                 label,
-                (trans_x + shift_label * xscale, shift_label * xscale),
+                (trans_x + shift_label * xscale, 2.0 * shift_label * xscale),
                 **config
             )
         identity_action = False

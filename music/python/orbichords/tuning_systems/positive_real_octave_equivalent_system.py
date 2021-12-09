@@ -9,7 +9,7 @@ def generate_plot():
     limit = 10
 
     # Probe points
-    probes = ({"label": "A", "x": 1.2, "color": "black"},)
+    probes = ({"label": "x", "x": 1.2, "color": "black"},)
 
     # Action over probes
     actions = (
