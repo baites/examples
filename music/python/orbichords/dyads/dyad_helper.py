@@ -4,14 +4,15 @@ from collections.abc import Callable
 from itertools import product
 from matplotlib.patches import Polygon
 import matplotlib.pyplot as canvas
+from typing import Tuple
 
 
-def apply_actions(action_ntuple: tuple, value: float) -> float:
+def apply_actions(action_ntuple: Tuple, value: float) -> float:
     """Apply all actions by concatenation.
 
     Parameters
     ----------
-        action_ntuple : tuple
+        action_nTuple : Tuple
             Tuple with action to concatenate
         value : float
             Value to apply the concatenated actions
@@ -33,40 +34,40 @@ def apply_actions(action_ntuple: tuple, value: float) -> float:
 #pylint: disable=too-many-locals
 #pylint: disable=too-many-statements
 def plot_dyad_orbichord(
-    x_lim: tuple,
-    y_lim: tuple,
+    x_lim: Tuple,
+    y_lim: Tuple,
     x_label: str,
     y_label: str,
-    fundamental_domain: tuple,
-    probes: tuple,
-    simplex: Callable[tuple, tuple] = lambda x: x,
-    id_lines: tuple = None,
-    actions: tuple = ((lambda x: x,),),
-    transform: Callable[tuple, tuple] = lambda x: x,
+    fundamental_domain: Tuple,
+    probes: Tuple,
+    simplex: Callable[[Tuple], Tuple] = lambda x: x,
+    id_lines: Tuple = None,
+    actions: Tuple = ((lambda x: x,),),
+    transform: Callable[[Tuple], Tuple] = lambda x: x,
 ):
     """Generate the plot for continuum dyad orbichords.
 
     Parameters
     ----------
-        x_lim : tuple
+        x_lim : Tuple
             Tuple with lower and upper x-axis limits.
-        y_lim : tuple
+        y_lim : Tuple
             Tuple with lower and upper y-axis limits.
         x_label : str
             Label of the x-axis.
         y_label : str
             Label of the y-axis.
-        fundamental_domain : tuple
+        fundamental_domain : Tuple
             Points that forms fundamental domain polygon.
-        probes : tuple
+        probes : Tuple
             Points for probing the fundamental domain.
-        simplex : Callable[[float, float], tuple]
+        simplex : Callable[[float, float], Tuple]
             Transforms to convert the fundamental domain into a simplex.
         id_lines:
             Identification lines to representing equivalent points.
-        actions : tuple
+        actions : Tuple
             List of actions to be apply to probes and identification lines.
-        transform : Callable[[float, float], tuple]
+        transform : Callable[[float, float], Tuple]
             Coordinate transformation common to all the objects.
     """
 
