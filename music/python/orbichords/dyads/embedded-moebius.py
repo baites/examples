@@ -1,4 +1,4 @@
-"""Example of quotient T^2 dyads embedded 3D."""
+"""Example of T^2/S_2 dyad or moebius strip embedded 3D."""
 
 from matplotlib import cm
 import matplotlib.pyplot as canvas

@@ -1,4 +1,4 @@
-"""Example of quotient T^2 dyads embedded 3D."""
+"""Example of quotient T^2 dyads or torus embedded 3D."""
 
 from matplotlib import cm
 import matplotlib.pyplot as canvas
@@ -41,9 +41,6 @@ X = (MAYOR_RADIUS + (MINOR_RADIUS+0.2)*np.cos(u)) * np.cos(v)
 Y = (MAYOR_RADIUS + (MINOR_RADIUS+0.2)*np.cos(u)) * np.sin(v)
 Z = (MINOR_RADIUS+0.2)*np.sin(u)
 ax.scatter(X, Y, Z, c=COLORS)
-
-# Save the picture
-#figure.savefigure("torus.png", dpi=100, transparent = False)
 
 # Plot the picture
 canvas.show()
